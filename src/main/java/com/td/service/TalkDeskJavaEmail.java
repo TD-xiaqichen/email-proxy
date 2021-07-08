@@ -9,7 +9,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-public class JavaEmail {
+public class TalkDeskJavaEmail {
 
     Properties emailProperties;
     Session mailSession;
@@ -18,7 +18,7 @@ public class JavaEmail {
     public static void main(String args[])
     {
 
-        JavaEmail javaEmail = new JavaEmail();
+        TalkDeskJavaEmail javaEmail = new TalkDeskJavaEmail();
 
         javaEmail.setMailServerProperties();
         try
@@ -76,9 +76,9 @@ public class JavaEmail {
     public void sendEmail() throws AddressException, MessagingException
     {
         String emailHost = "smtp.gmail.com";
-        String fromUser = "xqichen233@gmail.com";// just the id alone without
+        String fromUser = "qichen.xia@china.talkdesk.com";// just the id alone without
         // @gmail.com
-        String fromUserEmailPassword = "aafiouhnkealnwyb";
+        String fromUserEmailPassword = "hubthugrweccyoqy";
 
         Transport transport = mailSession.getTransport("smtp");
 
