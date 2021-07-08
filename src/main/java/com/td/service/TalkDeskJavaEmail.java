@@ -55,7 +55,7 @@ public class TalkDeskJavaEmail {
     {
       //  String[] toEmails = { "qichen.xia@china.talkdesk.com" };
         String[] toEmails = { "jiali.xiang@china.talkdesk.com" };
-        String emailSubject = "Java Email from xqichen233@gmail.com";
+        String emailSubject = "Java Email from qichen.xia@china.talkdesk.com";
         String emailBody = "This is an email sent by <b>JavaMail</b> api.";
 
         mailSession = Session.getDefaultInstance(emailProperties, null);
