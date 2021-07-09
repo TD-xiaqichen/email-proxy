@@ -10,10 +10,10 @@ import java.util.Random;
 
 @Data
 @Entity
-@Table(name="t_agent")
-public class Agent {
+@Table(name="t_email")
+public class Emailexd {
 
-    public Agent(){
+    public Emailexd(){
         Random random = new Random();
         this.id = Math.abs(random.nextLong());
     }
@@ -22,12 +22,19 @@ public class Agent {
     @Column(name="id")
     private Long id;
 
-    @Column(name="account")
-    private String account;
+    @Column(name="subject")
+    private String subject;
 
-    @Column(name="email")
-    private String email;
+    @Column(name="content")
+    private String content;
 
-    @Column(name="password")
-    private String password;
+    @Column(name="t_from")
+    private String from;
+
+    @Column(name="t_to")
+    private String to;
+
+    @Column(name="box_type")
+    private String boxType;
+
 }
