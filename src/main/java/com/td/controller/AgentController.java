@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Handler;
 
@@ -18,6 +20,46 @@ public class AgentController {
 
     @Autowired
     private AgentMapper agentRepository;
+
+    @RequestMapping("/getAgentById")
+    @ResponseBody
+    public Object getAgentById(@RequestBody Agent agent){
+        Agent agentById= agentRepository.getAgentById(agent.getId());
+        if(agentById!=null){
+            return agentById;
+        }
+        return new Agent();
+    }
+
+    @RequestMapping("/getAgentByAccount")
+    @ResponseBody
+    public Object getAgentByAccount(@RequestBody Agent agent){
+        Agent agentByAccount = agentRepository.getAgentByAccount(agent.getAccount());
+        if(agentByAccount!=null){
+            return agentByAccount;
+        }
+        return null;
+    }
+
+    @RequestMapping("/getAgentByEmail")
+    @ResponseBody
+    public Object getAgentByEmail(@RequestBody Agent agent){
+        Agent agentByEmail = agentRepository.getAgentByEmail(agent.getEmail());
+        if(agentByEmail!=null){
+            return agentByEmail;
+        }
+        return new Agent();
+    }
+
+    @RequestMapping("/listAgent")
+    @ResponseBody
+    public Object getAgentList(){
+        List<Agent> agents = agentRepository.agentList();
+        if(agents!=null&&agents.size()>0){
+            return agents;
+        }
+        return new ArrayList<Agent>();
+    }
 
     @RequestMapping("/saveAgent")
     @ResponseBody
