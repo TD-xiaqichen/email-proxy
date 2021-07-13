@@ -3,24 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+    .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+   }
+
+   table, tr{
+      border:1px solid #F00;
+   }
+    </style>
 </head>
 <body>
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="js/jquery.params.js"></script>
  <input type="hidden" id="email">
 
- <table id ='frjlTable'>
+<div>
+
+
+</div>
+
+<div>
+ <table id ='frjlTable' style="text-align:center;margin:0 auto;">
     <thead>
     <tr>
-        <td>From</td>
-        <td>Subject</td>
+        <td align="left">From</td>
+        <td align="left">Subject</td>
+        <td><button>Compose</button></td>
     </tr>
     </thead>
      <tbody>
 
      </tbody>
  </table>
-
+</div>
 <script>
     $().ready(function(){
     getDatal();
@@ -45,9 +68,12 @@
         success: function (response) {
          var data = response;
          var content='';
-          for(var i in data){
+         for(var i=0;i<15;i++){
           content +='<tr><td>'+data[i].from+'</td><td>'+data[i].subject+'</td></tr>'
-          }
+         }
+<!--          for(var i in data){-->
+<!--          content +='<tr><td>'+data[i].from+'</td><td>'+data[i].subject+'</td></tr>'-->
+<!--          }-->
           $('#frjlTable tbody').append(content);
         },
 
