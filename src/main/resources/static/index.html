@@ -7,27 +7,39 @@
 <body>
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
- <table>
+ <table id ='frjlTable'>
+    <thead>
     <tr>
         <td>From</td>
         <td>Subject</td>
     </tr>
+    </thead>
+     <tbody>
+
+     </tbody>
  </table>
 
 <script>
+    $().ready(function(){
+    listEmail();
+});
+
     var listEmail = function(){
         $.ajax({
 
-        url: url,
+        url: 'findListMails',
 
         type: 'POST',
 
         contentType: 'application/json; charset=utf-8',
 
         success: function (response) {
-
-        alert(response.status);
-
+         var data = response;
+         var content='';
+          for(var i in data){
+          content +='<tr><td>'+data[i].from+'</td><td>'+data[i].subject+'</td></tr>'
+          }
+          $('#frjlTable tbody').append(content);
         },
 
         error: function () {
