@@ -1,5 +1,6 @@
 package com.td.controller;
 
+import com.td.imap.SimpleStoreMails;
 import com.td.model.Emailexd;
 import com.td.service.SendEmailService;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,9 @@ public class SendMailController {
     @Resource
     private SendEmailService sendEmailService;
 
+    @Resource
+    private SimpleStoreMails simpleStoreMails;
+
        @RequestMapping("/sendEmail")
        @ResponseBody
        public Object sendEmail(@RequestBody Emailexd email){
@@ -33,5 +37,12 @@ public class SendMailController {
            }
            return map;
        }
+
+    @RequestMapping("/imapMessages")
+    @ResponseBody
+      public Object listReceiveMessages(){
+        simpleStoreMails.saveImapMessages();
+           return null;
+      }
 
 }

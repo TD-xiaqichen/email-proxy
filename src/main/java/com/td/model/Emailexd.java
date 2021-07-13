@@ -2,10 +2,7 @@ package com.td.model;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Random;
 
 @Data
@@ -25,7 +22,8 @@ public class Emailexd {
     @Column(name="subject")
     private String subject;
 
-    @Column(name="content")
+    @Lob
+    @Column(name="content",columnDefinition="TEXT")
     private String content;
 
     @Column(name="t_from")
@@ -33,6 +31,12 @@ public class Emailexd {
 
     @Column(name="t_to")
     private String to;
+
+    @Column(name="t_cc")
+    private String cc;
+
+    @Column(name="t_bcc")
+    private String bcc;
 
     @Column(name="box_type")
     private String boxType;
