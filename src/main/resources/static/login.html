@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{text-align:center}
+        #divcss5{
+          margin:0 auto;
+          border:1px solid #000;
+          width:500px;
+          height:600px;
+        }
+
+        .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+    </style>
+</head>
+<body>
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+   <div id="divcss5">
+     <table>
+       <thead>
+         <tr>
+           <td colspan="2">Email account agent regist</td>
+         </tr>
+       </thead>
+       <tbody>
+        <tr>
+            <td>Email Address</td><td><input type="text" id="email"></td>
+        </tr>
+        <tr>
+           <td>Gmail AppId Password</td><td><input type="text"></td>
+        </tr>
+       <tr>
+           <td><button onclick="forward()">login in</button></td>
+       </tr>
+       </tbody>
+     </table>
+   </div>
+<script>
+    var forward=function(){
+      name = $("#email").val();
+      url="index.html?name="+name;
+      window.location.href = url;
+    }
+</script>
+</body>
+</html>

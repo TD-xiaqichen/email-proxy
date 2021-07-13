@@ -6,6 +6,8 @@
 </head>
 <body>
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="js/jquery.params.js"></script>
+ <input type="hidden" id="email">
 
  <table id ='frjlTable'>
     <thead>
@@ -21,8 +23,15 @@
 
 <script>
     $().ready(function(){
+    getDatal();
+
     listEmail();
 });
+
+   var getDatal= function(){
+     var name = $.query.get("name");
+     $("#email").val(name);
+   }
 
     var listEmail = function(){
         $.ajax({
