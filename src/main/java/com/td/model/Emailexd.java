@@ -22,6 +22,7 @@ public class Emailexd {
     @Column(name="subject")
     private String subject;
 
+    @org.hibernate.annotations.Type(type = "org.hibernate.type.TextType")
     @Lob
     @Column(name="content",columnDefinition="TEXT")
     private String content;

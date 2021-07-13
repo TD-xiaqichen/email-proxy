@@ -1,5 +1,6 @@
 package com.td.controller;
 
+import com.td.dao.mapper.EmailMapper;
 import com.td.imap.SimpleStoreMails;
 import com.td.model.Emailexd;
 import com.td.service.SendEmailService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -20,6 +22,9 @@ public class SendMailController {
 
     @Resource
     private SimpleStoreMails simpleStoreMails;
+
+    @Resource
+    private EmailMapper emailMapper;
 
        @RequestMapping("/sendEmail")
        @ResponseBody
@@ -43,6 +48,14 @@ public class SendMailController {
       public Object listReceiveMessages(){
         simpleStoreMails.saveImapMessages();
            return null;
+      }
+
+    @RequestMapping("/findListMails")
+    @ResponseBody
+      public Object findListMails(){
+          List<Emailexd> list = emailMapper.findList();
+
+          return list;
       }
 
 }

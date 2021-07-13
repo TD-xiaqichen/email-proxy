@@ -5,6 +5,40 @@
     <title>Title</title>
 </head>
 <body>
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
+ <table>
+    <tr>
+        <td>From</td>
+        <td>Subject</td>
+    </tr>
+ </table>
+
+<script>
+    var listEmail = function(){
+        $.ajax({
+
+        url: url,
+
+        type: 'POST',
+
+        contentType: 'application/json; charset=utf-8',
+
+        success: function (response) {
+
+        alert(response.status);
+
+        },
+
+        error: function () {
+
+        alert("error");
+
+        }
+
+        });
+        return false;
+    }
+</script>
 </body>
 </html>

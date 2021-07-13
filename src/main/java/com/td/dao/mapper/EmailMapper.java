@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
@@ -15,6 +16,15 @@ public class EmailMapper {
 
     @Resource
     private EntityManagerFactory entityManagerFactory;
+
+
+    public List<Emailexd> findList(){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        TypedQuery<Emailexd> query = entityManager.createQuery("select s from Emailexd s", Emailexd.class);
+        List<Emailexd> resultList = query.getResultList();
+        safelyClose(entityManager);
+        return resultList;
+    }
 
     public void saveEmail(List<Emailexd> emailexdList){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
