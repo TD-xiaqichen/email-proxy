@@ -18,6 +18,13 @@
    table, tr{
       border:1px solid #F00;
    }
+   #banner_div{
+      height:150px;
+   }
+   #sendButton{
+      margin-left: 20px;
+      margin-top: 20px;
+   }
     </style>
 </head>
 <body>
@@ -25,8 +32,8 @@
 <script src="js/jquery.params.js"></script>
  <input type="hidden" id="email">
 
-<div>
-
+<div id="banner_div">
+<button id="sendButton" onclick="openSendlayer()">New Message Send</button>
 
 </div>
 
@@ -50,6 +57,15 @@
 
     listEmail();
 });
+
+  var openSendlayer=function(){
+     var owurl = 'compose.html';
+     var tmp =window.open('about:blank','','fullscreen=1');
+       tmp.moveTo(0,0);
+       tmp.resizeTo(1028,720);
+       tmp.focus();
+       tmp.location = owurl;
+  }
 
    var getDatal= function(){
      var name = $.query.get("name");
