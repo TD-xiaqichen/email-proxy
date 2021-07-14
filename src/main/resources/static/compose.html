@@ -25,6 +25,8 @@
 </head>
 <body>
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="js/jquery.params.js"></script>
+<input type="hidden" id="login_user">
 <div>
     <ul>
         <li>
@@ -46,13 +48,52 @@
             </div>
         </li>
         <li>
-            <button>deliver</button>
+            <button onclick="sendMail()">deliver</button>
         </li>
     </ul>
 </div>
 
 <script>
+   $().ready(
+    function(){
+       getDetail();
+    }
+   );
+   var getDetail = function(){
+      var account = $.query.get("account");
+     $("#login_user").val(account);
+   }
 
+   var sendMail = function(){
+      var param = {};
+      var subject = $('#subject input').val();
+      var from  = $("#login_user").val();
+      var to = $('#to input').val();
+      var content = $('#content textarea').text();
+      param.subject = subject;
+      param.from = from;
+      param.to = to;
+      param.content = content;
+      console.log(param);
+        $.ajax({
+        url: 'sendEmail',
+
+        type: 'POST',
+
+        data: JSON.stringify(param) ,
+
+        contentType: 'application/json; charset=utf-8',
+        success: function (response) {
+          console.log(param);
+        },
+        error: function () {
+
+        alert("error");
+
+        }
+
+        });
+   }
 </script>
 </body>
 </html>

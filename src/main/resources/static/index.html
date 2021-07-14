@@ -43,7 +43,7 @@
     <tr>
         <td align="left">From</td>
         <td align="left">Subject</td>
-        <td><button>Compose</button></td>
+<!--        <td><button>Compose</button></td>-->
     </tr>
     </thead>
      <tbody>
@@ -59,7 +59,9 @@
 });
 
   var openSendlayer=function(){
-     var owurl = 'compose.html';
+     var account = $('#email').val();
+<!--     alert(account);-->
+     var owurl = 'compose.html?account='+account;
      var tmp =window.open('about:blank','','fullscreen=1');
        tmp.moveTo(0,0);
        tmp.resizeTo(1028,720);
