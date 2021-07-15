@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+     ul li{
+        list-style: none;
+     }
+     p{
+       display: inline;
+     }
+
+      textarea{
+         width: 500px;
+         height: 400px;
+      }
+      #main_div{
+<!--        text-align: center;-->
+        margin: 0 auto;
+      }
+
+    </style>
+</head>
+<body>
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="js/jquery.params.js"></script>
+<input type="hidden" id="messageId">
+<div id="main_div">
+    <ul>
+        <li><p id="subject">祝你生日快乐</p></li>
+        <li><p>From:</p>
+            <p id="from">admin@qq.com</p></li>
+        <li><p>Send Date:</p>
+            <p id="sendDate">2021-07-14</p></li>
+        <li>
+       <textarea id="content">
+         有些事情可能你已经忘记，但我们依然记得。今天(7月14日)是你的生日，我们唱了一首歌送给你，希望它能给你带来一些惊喜和欢乐。Happy Birthday。
+       </textarea>
+        </li>
+    </ul>
+</div>
+<script>
+    $().ready(
+        function(){
+         getDatal();
+        }
+    );
+   var getDatal= function(){
+     var id = $.query.get("id");
+     $("#messageId").val(id);
+     var param = {};
+     param.messageId = id+'';
+    $.ajax({
+
+        url: 'detailMessage',
+
+        type: 'POST',
+
+        data: JSON.stringify(param),
+
+        contentType: 'application/json; charset=utf-8',
+
+        success: function (response) {
+            var subject = response.subject ;
+            var from = response.from ;
+            var sentDate = response.sentDate;
+            var content = response.content;
+            $('#subject').text(subject);
+            $('#from').text(from);
+            $('#sendDate').text(sentDate);
+            $('#content').text(content);
+        },
+        error: function(){
+           alert('error');
+        }
+
+     });
+   }
+</script>
+</body>
+</html>

@@ -17,6 +17,15 @@ public class EmailMapper {
     @Resource
     private EntityManagerFactory entityManagerFactory;
 
+    public Emailexd getMessageById(String messageId){
+        System.out.println(messageId);
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        TypedQuery<Emailexd> query = entityManager.createQuery("select s from Emailexd s where s.id=?1", Emailexd.class);
+        query.setParameter(1,messageId);
+        List<Emailexd> resultList = query.getResultList();
+        safelyClose(entityManager);
+        return resultList.get(0);
+    }
 
     public List<Emailexd> findList(){
         EntityManager entityManager = entityManagerFactory.createEntityManager();

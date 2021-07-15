@@ -12,12 +12,13 @@ public class Emailexd {
 
     public Emailexd(){
         Random random = new Random();
-        this.id = Math.abs(random.nextLong());
+        long abs = Math.abs(random.nextLong());
+        this.id = String.valueOf(abs);
     }
 
     @Id
     @Column(name="id")
-    private Long id;
+    private String id;
 
     @Column(name="subject")
     private String subject;
@@ -42,4 +43,9 @@ public class Emailexd {
     @Column(name="box_type")
     private String boxType;
 
+    @Column(name="sent_date")
+    private String sentDate;
+
+    @Column(name="message_id")
+    private String messageId;
 }

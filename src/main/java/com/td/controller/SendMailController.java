@@ -2,8 +2,10 @@ package com.td.controller;
 
 import com.td.dao.mapper.EmailMapper;
 import com.td.imap.SimpleStoreMails;
+import com.td.imap.StoreMailExtend;
 import com.td.model.Emailexd;
 import com.td.service.SendEmailService;
+import com.td.util.HTMLUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,9 @@ public class SendMailController {
 
     @Resource
     private SimpleStoreMails simpleStoreMails;
+
+    @Resource
+    private StoreMailExtend storeMailExtend;
 
     @Resource
     private EmailMapper emailMapper;
@@ -46,8 +51,13 @@ public class SendMailController {
     @RequestMapping("/imapMessages")
     @ResponseBody
       public Object listReceiveMessages(){
-        simpleStoreMails.saveImapMessages();
-           return null;
+//        simpleStoreMails.saveImapMessages();
+        try {
+            storeMailExtend.saveImapMessages();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
       }
 
     @RequestMapping("/findListMails")
@@ -56,6 +66,18 @@ public class SendMailController {
           List<Emailexd> list = emailMapper.findList();
 
           return list;
+      }
+
+    @RequestMapping("/detailMessage")
+    @ResponseBody
+      public Object detailMessage(@RequestBody Emailexd email){
+        String id = email.getId();
+        String messageId = email.getMessageId();
+        messageId= messageId.replaceAll("\"","");
+        Emailexd emailexd = emailMapper.getMessageById(messageId);
+        String s = HTMLUtil.removeHtmlTag(emailexd.getContent());
+        emailexd.setContent(s);
+        return emailexd;
       }
 
 }

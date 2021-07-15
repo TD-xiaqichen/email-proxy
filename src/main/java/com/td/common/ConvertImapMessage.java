@@ -12,6 +12,8 @@ import javax.mail.internet.ContentType;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMultipart;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,6 +42,12 @@ public class ConvertImapMessage {
             Map<String, String> map = getHtml(imapMessage);
             String htmlContent = map.get("htmlContent");
             emailexd.setContent(htmlContent);
+           // String date = imapMessage.getHeader("Date", ",");
+            Date sentDate = imapMessage.getSentDate();
+            String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(sentDate);
+            emailexd.setSentDate(date);
+            String messageId = imapMessage.getHeader("Message-Id", ",");
+            emailexd.setMessageId(messageId);
             return emailexd;
         }
 
