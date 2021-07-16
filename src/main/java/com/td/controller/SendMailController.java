@@ -1,10 +1,13 @@
 package com.td.controller;
 
+import com.td.dao.mapper.AgentMapper;
 import com.td.dao.mapper.EmailMapper;
 import com.td.imap.SimpleStoreMails;
 import com.td.imap.StoreMailExtend;
+import com.td.model.Agent;
 import com.td.model.Emailexd;
 import com.td.service.SendEmailService;
+import com.td.service.receive.FetchRecentEmail;
 import com.td.util.HTMLUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +35,12 @@ public class SendMailController {
 
     @Resource
     private EmailMapper emailMapper;
+
+    @Resource
+    private AgentMapper agentMapper;
+
+    @Resource
+    private FetchRecentEmail fetchRecentEmail;
 
        @RequestMapping("/sendEmail")
        @ResponseBody
@@ -78,6 +89,23 @@ public class SendMailController {
         String s = HTMLUtil.removeHtmlTag(emailexd.getContent());
         emailexd.setContent(s);
         return emailexd;
+      }
+
+      @RequestMapping("/refreshUnseenMessage")
+      @ResponseBody
+      public Object refreshUnseenMessage(@RequestBody Agent agent){
+          String email = agent.getEmail();
+          Agent obj = agentMapper.getAgentByEmail(email);
+          String password = obj.getPassword();
+          try {
+              List<Emailexd> emailexds = fetchRecentEmail.saveRecentMessage(email, password);
+              return emailexds;
+          } catch (MessagingException e) {
+              e.printStackTrace();
+          } catch (IOException e) {
+              e.printStackTrace();
+          }
+          return null;
       }
 
 }

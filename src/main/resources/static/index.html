@@ -25,31 +25,37 @@
       margin-left: 20px;
       margin-top: 20px;
    }
+   #receiveButton{
+     float: right;
+     margin-right: 20px;
+     margin-top: 20px;
+   }
+
     </style>
 </head>
 <body>
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="js/jquery.params.js"></script>
- <input type="hidden" id="email">
+<input type="hidden" id="email">
 
 <div id="banner_div">
-<button id="sendButton" onclick="openSendlayer()">New Message Send</button>
-
+    <button id="sendButton" onclick="openSendlayer()">New Message Send</button>
+    <button id="receiveButton" onclick="fetchFreshs()">Receive Fresh Message</button>
 </div>
 
 <div>
- <table id ='frjlTable' style="text-align:center;margin:0 auto;">
-    <thead>
-    <tr>
-        <td align="left">From</td>
-        <td align="left">Subject</td>
-        <td align="left">Sent Date</td>
-    </tr>
-    </thead>
-     <tbody>
+    <table id='frjlTable' style="text-align:center;margin:0 auto;">
+        <thead>
+        <tr>
+            <td align="left">From</td>
+            <td align="left">Subject</td>
+            <td align="left">Sent Date</td>
+        </tr>
+        </thead>
+        <tbody>
 
-     </tbody>
- </table>
+        </tbody>
+    </table>
 </div>
 <script>
     $().ready(function(){
@@ -57,6 +63,30 @@
 
     listEmail();
 });
+
+  var fetchFreshs = function(){
+      var email = $("#email").val();
+     var param = {};
+     param.email = email;
+     $.ajax({
+        url: 'refreshUnseenMessage',
+        type: 'POST',
+        data: JSON.stringify(param),
+        contentType: 'application/json; charset=utf-8',
+        success: function(response){
+           var data = response;
+              var content='';
+         for(var i=0;i<15;i++){
+          content +='<tr id="'+data[i].id+'" messageId = "'+data[i].messageId+'" onclick="detail(this)"><td>'+data[i].from+'</td><td>'+data[i].subject+'</td><td>'+data[i].sentDate+'</td>'
+          +'</tr>'
+         }
+          $('#frjlTable tbody').append(content);
+        },
+        error: function(){
+          alert('error');
+        }
+     });
+  }
 
   var openSendlayer=function(){
      var account = $('#email').val();
@@ -114,6 +144,7 @@
         });
         return false;
     }
+
 </script>
 </body>
 </html>

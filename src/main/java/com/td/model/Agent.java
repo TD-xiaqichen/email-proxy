@@ -15,7 +15,7 @@ public class Agent {
 
     public Agent(){
         Random random = new Random();
-        this.id = Math.abs(random.nextLong());
+        this.id = (long)Math.abs(random.nextInt());
     }
 
     @Id
