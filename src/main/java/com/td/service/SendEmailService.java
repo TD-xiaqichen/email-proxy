@@ -34,11 +34,13 @@ public class SendEmailService {
     public void setMailServerProperties() {
 
         String emailPort = "587";// gmail's smtp port
-
+        String emailPort2 = "465";
         emailProperties = System.getProperties();
         emailProperties.put("mail.smtp.port", emailPort);
         emailProperties.put("mail.smtp.auth", "true");
         emailProperties.put("mail.smtp.starttls.enable", "true");
+        emailProperties.put("mail.smtp.host", "smtp.gmail.com");
+//        emailProperties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
     }
 

@@ -1,6 +1,7 @@
 package com.td.dao.mapper;
 
 import com.td.model.Emailexd;
+import org.apache.commons.mail.Email;
 import org.hibernate.internal.SessionImpl;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -40,6 +41,18 @@ public class EmailMapper {
         List<Emailexd> resultList = query.getResultList();
         safelyClose(entityManager);
         return resultList;
+    }
+
+    public List<Emailexd> findListByCurrent(String currentEmail){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        String hql = "select s from Emailexd s order by s.sentDate desc";
+        TypedQuery<Emailexd> query = entityManager.createQuery(hql, Emailexd.class);
+        List<Emailexd> resultList = query.getResultList();
+        safelyClose(entityManager);
+        List<Emailexd> collect = resultList.stream().filter(a -> {
+            return a.getTo().contains(currentEmail);
+        }).collect(Collectors.toList());
+        return collect;
     }
 
     public void saveBatch(List<Emailexd> emailexdList){

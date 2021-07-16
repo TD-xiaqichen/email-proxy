@@ -62,7 +62,8 @@ public class FetchRecentEmail {
           //  emailMapper.saveEmail(emailexdList);
             emailMapper.saveBatch(emailexdList);
         }
-        List<Emailexd> list = emailMapper.findList();
+//        List<Emailexd> list = emailMapper.findList();
+        List<Emailexd> list = emailMapper.findListByCurrent(email);
         return list;
     }
 
