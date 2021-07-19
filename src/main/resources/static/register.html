@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        dl{
+          text-align: center;
+          margin: 0 0;
+        }
+
+       #banner{
+          height: 100px;
+       }
+
+    </style>
+</head>
+<body>
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="js/jquery.params.js"></script>
+<div id="banner">
+
+</div>
+<div>
+    <dl>
+        <dt><p>please Fill in your Email address and App password</p></dt>
+        <dd><input type="text" id="email"/></dd>
+        <dd><input type="text" id="password"/></dd>
+        <dd>
+            <button onclick="regist()">register</button>
+        </dd>
+    </dl>
+</div>
+<script>
+     var regist=function(){
+       var email = $('#email').val();
+       var password = $('#password').val();
+       var param ={};
+       param.email = email;
+       param.password = password;
+         $.ajax({
+        url: 'saveAgent',
+
+        type: 'POST',
+
+        data: JSON.stringify(param) ,
+
+        contentType: 'application/json; charset=utf-8',
+
+        success: function(response){
+            url="login.html";
+            window.location.href = url;
+        },
+
+        error: function(){
+            alert('erro');
+        }
+
+    });
+ }
+
+
+</script>
+</body>
+</html>
