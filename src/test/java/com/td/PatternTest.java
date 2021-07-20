@@ -23,4 +23,13 @@ public class PatternTest {
          boolean b = matcher.find();
          System.out.println(b);
      }
+
+     @Test
+     public void testthree(){
+        String s = "^<([a-z]+)([^<]+)*(?:>(.*)<\\/\\1>|\\s+\\/>)$";
+        Pattern p = Pattern.compile(s);
+        Matcher matcher = p.matcher("<div> <b>发件人:</b> xiang jiali &lt;jialixiang.john.test@outlook.com&gt;" );
+        boolean b =matcher.find();
+         System.out.println(b);
+    }
 }

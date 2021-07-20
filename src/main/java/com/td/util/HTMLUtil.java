@@ -1,4 +1,7 @@
 package com.td.util;
+import javax.print.attribute.HashAttributeSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,6 +40,10 @@ public class HTMLUtil {
         Matcher m_special = p_special.matcher(htmlStr);
         htmlStr = m_special.replaceAll("");
         return htmlStr;
+    }
+
+    public static void main(String[] args) {
+
     }
 
 }

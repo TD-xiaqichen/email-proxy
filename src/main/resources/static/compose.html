@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
+        ul{
+         margin-left: 140px;
+         margin-top: 50px;
+        }
         ul li{
            list-style: none;
         }
@@ -24,17 +28,24 @@
     </style>
 </head>
 <body>
+<!-- css 文件 -->
+<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/foundation/5.5.3/css/foundation.min.css">
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="js/jquery.params.js"></script>
+<!-- JavaScript 文件 -->
+<script src="http://cdn.static.runoob.com/libs/foundation/5.5.3/js/foundation.min.js"></script>
+<!-- modernizr.js 文件 -->
+<script src="http://cdn.static.runoob.com/libs/foundation/5.5.3/js/vendor/modernizr.js"></script>
+
 <input type="hidden" id="login_user">
-<div>
+<div id="main">
     <ul>
         <li>
             <div id="thead"><p style="color:white">New Message</p></div>
         </li>
         <li>
             <div id="to"><p style="fload:left;width: 50px;">To</p>
-                <input type="text" style="width: 400px;float: right;margin-top:10px;">
+                <input type="text" placeholder="xx@xx.com" style="width: 400px;float: right;margin-top:10px;">
             </div>
         </li>
         <li>
@@ -48,7 +59,7 @@
             </div>
         </li>
         <li>
-            <button onclick="sendMail()">deliver</button>
+            <button onclick="sendMail()" class="button info">deliver</button>
         </li>
     </ul>
 </div>
