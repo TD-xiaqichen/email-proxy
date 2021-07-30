@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: springbootPrometheusGrafana
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:  '*'
+  metrics:
+    tags:
+      application: ${spring.application.name}
